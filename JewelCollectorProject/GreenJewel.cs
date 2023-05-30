@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace JewelCollectorProject
 {
-    public class RedJewel : Cell
+    public class GreenJewel : Cell
     {
-        public RedJewel(int xLocation, int yLocation)
+        public GreenJewel(int xLocation, int yLocation)
         {
             X = xLocation;
             Y = yLocation;
@@ -15,7 +15,7 @@ namespace JewelCollectorProject
 
         public override string ToString()
         {
-            return " JR";
+            return " JG";
         }
     }
 }

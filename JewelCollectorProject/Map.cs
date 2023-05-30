@@ -31,6 +31,18 @@ namespace JewelCollectorProject
                 (1, 9),
                 (8, 8),
             };
+
+            List<(int, int)> greenJewelPositions = new List<(int, int)>
+            {
+                (9, 1),
+                (7, 6),
+            };
+
+            List<(int, int)> blueJewelPositions = new List<(int, int)>
+            {
+                (3, 4),
+                (2, 1),
+            };
             
             List<(int, int)> waterPositions = new List<(int, int)>
             {
@@ -46,10 +58,10 @@ namespace JewelCollectorProject
             List<(int, int)> treePositions = new List<(int, int)>
             {
                 (1, 4),
-                (2,5),
-                (3,9),
-                (5,9),
-                (8,3),
+                (2, 5),
+                (3, 9),
+                (5, 9),
+                (8, 3),
             };
 
             for (int i = 0; i < dimension; i++)
@@ -65,6 +77,16 @@ namespace JewelCollectorProject
                     else if (redJewelPositions.Contains((i, j)))
                     {
                         Cell cell = new RedJewel(i, j);
+                        row.Add(cell);
+                    }
+                    else if (greenJewelPositions.Contains((i, j)))
+                    {
+                        Cell cell = new GreenJewel(i, j);
+                        row.Add(cell);
+                    }
+                    else if (blueJewelPositions.Contains((i, j)))
+                    {
+                        Cell cell = new BlueJewel(i, j);
                         row.Add(cell);
                     }
                     else if (treePositions.Contains((i, j)))
