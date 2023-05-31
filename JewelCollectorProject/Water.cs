@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JewelCollectorProject
 {
-    public class Water : Cell, IObstacle
+    public class Water : Cell
     {
         public Water (int xLocation, int yLocation)
         {
@@ -15,7 +15,7 @@ namespace JewelCollectorProject
         
         public override string ToString()
         {
-            return " ##";
+            return " ## ";
         }
     }
 }

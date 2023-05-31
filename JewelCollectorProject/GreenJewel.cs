@@ -15,7 +15,7 @@ namespace JewelCollectorProject
 
         public override string ToString()
         {
-            return " JG";
+            return " JG ";
         }
     }
 }

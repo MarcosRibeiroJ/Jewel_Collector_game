@@ -10,6 +10,9 @@ namespace JewelCollectorProject
         private int dimension = 10;
         private List<List<Cell>> mapMatrix = new List<List<Cell>>();
 
+        private string exitGame = "";
+        private Robot robot = new Robot(0,0);
+
         public void createMap2() {
             for (int i = 0; i < dimension; i++)
             {
@@ -71,7 +74,7 @@ namespace JewelCollectorProject
                 {
                     if (i == 0 && j == 0)
                     {
-                        Cell cell = new Robot(i, j);
+                        Cell cell = robot;
                         row.Add(cell);
                     }
                     else if (redJewelPositions.Contains((i, j)))
@@ -111,14 +114,63 @@ namespace JewelCollectorProject
 
 
         public void printMap() {
-            foreach (List<Cell> row in mapMatrix)
+            bool running = true;
+            do
             {
-                foreach (Cell cell in row)
+                Console.Clear();
+                foreach (List<Cell> row in mapMatrix)
                 {
-                    Console.Write(cell);
+                    foreach (Cell cell in row)
+                    {
+                        Console.Write(cell);
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
-            }
+                Console.WriteLine("Bag total items: 0 | Bag total value: 0");
+                Console.Write("Enter the command: ");
+                ConsoleKeyInfo keyPressed = Console.ReadKey();
+                string command = keyPressed.KeyChar.ToString();
+                exitGame = exitGame + command;
+                if (exitGame.Contains("quit"))
+                {
+                    running = false;
+                } else if (command.Equals("w"))
+                {
+                    if(robot.X - 1 >= 0 && mapMatrix[robot.X-1][robot.Y] is Empty)
+                    {
+                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X-1][robot.Y];
+                        mapMatrix[robot.X-1][robot.Y] = robot;
+                        robot.X--;
+                    }
+                } else if (command.Equals("a"))
+                {
+                    if(robot.Y - 1 >= 0 && mapMatrix[robot.X][robot.Y-1] is Empty)
+                    {
+                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X][robot.Y-1];
+                        mapMatrix[robot.X][robot.Y-1] = robot;
+                        robot.Y--;
+                    }                   
+                } else if (command.Equals("s"))
+                {
+                    if(robot.X + 1 < dimension && mapMatrix[robot.X+1][robot.Y] is Empty)
+                    {
+                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X+1][robot.Y];
+                        mapMatrix[robot.X+1][robot.Y] = robot;
+                        robot.X++;
+                    }
+                } else if (command.Equals("d"))
+                {
+                    if(robot.Y + 1 < dimension && mapMatrix[robot.X][robot.Y+1] is Empty)
+                    {
+                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X][robot.Y+1];
+                        mapMatrix[robot.X][robot.Y+1] = robot;
+                        robot.Y++;
+                    }
+                } else if (command.Equals("g"))
+                {
+              
+                }
+            } while (running);
         }
     }
 }

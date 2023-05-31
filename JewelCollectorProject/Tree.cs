@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JewelCollectorProject
 {
-    public class Tree : Cell, IObstacle
+    public class Tree : Cell
     {
         public Tree (int xLocation, int yLocation)
         {
@@ -15,7 +15,7 @@ namespace JewelCollectorProject
         
         public override string ToString()
         {
-            return " $$";
+            return " $$ ";
         }
     }
 }
