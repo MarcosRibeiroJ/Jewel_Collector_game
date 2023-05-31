@@ -7,6 +7,7 @@ namespace JewelCollectorProject
 {
     public class Robot : Cell
     {
+        public int Bag {get; set;}
         public Robot(int xLocation, int yLocation)
         {
             X = xLocation;

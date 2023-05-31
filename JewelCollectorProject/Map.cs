@@ -126,11 +126,19 @@ namespace JewelCollectorProject
                     }
                     Console.WriteLine();
                 }
-                Console.WriteLine("Bag total items: 0 | Bag total value: 0");
-                Console.Write("Enter the command: ");
+                Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: 0");
+                if(exitGame.Length == 0)
+                {
+                    Console.Write($"Enter the command: ");
+                } else
+                {
+                    Console.Write($"Enter the command: {exitGame[exitGame.Length-1]}");
+                }
+                
                 ConsoleKeyInfo keyPressed = Console.ReadKey();
                 string command = keyPressed.KeyChar.ToString();
                 exitGame = exitGame + command;
+                
                 if (exitGame.Contains("quit"))
                 {
                     running = false;
@@ -168,7 +176,7 @@ namespace JewelCollectorProject
                     }
                 } else if (command.Equals("g"))
                 {
-              
+                    robot.Bag++;
                 }
             } while (running);
         }
