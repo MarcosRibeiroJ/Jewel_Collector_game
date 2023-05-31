@@ -51,7 +51,7 @@ namespace JewelCollectorProject
         {
             int totalColumns = map.Count > 0 ? map[0].Count : 0;
 
-            if(Y + 1 < totalColumns - 1 && map[X][Y+1] is Empty)
+            if(Y + 1 < totalColumns && map[X][Y+1] is Empty)
             {
                 map[X][Y] = map[X][Y+1];
                 map[X][Y+1] = this;
