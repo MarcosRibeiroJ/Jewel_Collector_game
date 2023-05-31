@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JewelCollectorProject
+namespace JewelCollectorProject.Jewels
 {
-    public class RedJewel : Cell
+    public class RedJewel : Cell, IJewel
     {
-        public RedJewel(int xLocation, int yLocation)
-        {
-            X = xLocation;
-            Y = yLocation;
-        }
-
         public override string ToString()
         {
             return " JR ";

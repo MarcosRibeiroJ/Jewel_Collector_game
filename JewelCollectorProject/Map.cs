@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JewelCollectorProject.Jewels;
+using JewelCollectorProject.Obstacles;
 
 namespace JewelCollectorProject
 {
@@ -12,19 +14,6 @@ namespace JewelCollectorProject
 
         private string exitGame = "";
         private Robot robot = new Robot(0,0);
-
-        public void createMap2() {
-            for (int i = 0; i < dimension; i++)
-            {
-                List<Cell> row = new List<Cell>();
-                for (int j = 0; j < dimension; j++)
-                {
-                    Cell cell = new Empty(i, j);
-                    row.Add(cell);
-                }
-                mapMatrix.Add(row);
-            }
-        }
 
         public void createMap()
         {
@@ -79,32 +68,32 @@ namespace JewelCollectorProject
                     }
                     else if (redJewelPositions.Contains((i, j)))
                     {
-                        Cell cell = new RedJewel(i, j);
+                        Cell cell = new RedJewel();
                         row.Add(cell);
                     }
                     else if (greenJewelPositions.Contains((i, j)))
                     {
-                        Cell cell = new GreenJewel(i, j);
+                        Cell cell = new GreenJewel();
                         row.Add(cell);
                     }
                     else if (blueJewelPositions.Contains((i, j)))
                     {
-                        Cell cell = new BlueJewel(i, j);
+                        Cell cell = new BlueJewel();
                         row.Add(cell);
                     }
                     else if (treePositions.Contains((i, j)))
                     {
-                        Cell cell = new Tree(i, j);
+                        Cell cell = new Tree();
                         row.Add(cell);
                     }
                     else if (waterPositions.Contains((i, j)))
                     {
-                        Cell cell = new Water(i, j);
+                        Cell cell = new Water();
                         row.Add(cell);
                     }
                     else
                     {
-                        Cell cell = new Empty(i, j);
+                        Cell cell = new Empty();
                         row.Add(cell);
                     }
                 }
@@ -126,7 +115,7 @@ namespace JewelCollectorProject
                     }
                     Console.WriteLine();
                 }
-                Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: 0");
+                Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: {robot.totalScore}");
                 if(exitGame.Length == 0)
                 {
                     Console.Write($"Enter the command: ");
@@ -144,39 +133,19 @@ namespace JewelCollectorProject
                     running = false;
                 } else if (command.Equals("w"))
                 {
-                    if(robot.X - 1 >= 0 && mapMatrix[robot.X-1][robot.Y] is Empty)
-                    {
-                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X-1][robot.Y];
-                        mapMatrix[robot.X-1][robot.Y] = robot;
-                        robot.X--;
-                    }
+                    robot.moveUp(mapMatrix);
                 } else if (command.Equals("a"))
                 {
-                    if(robot.Y - 1 >= 0 && mapMatrix[robot.X][robot.Y-1] is Empty)
-                    {
-                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X][robot.Y-1];
-                        mapMatrix[robot.X][robot.Y-1] = robot;
-                        robot.Y--;
-                    }                   
+                    robot.moveLeft(mapMatrix);                   
                 } else if (command.Equals("s"))
                 {
-                    if(robot.X + 1 < dimension && mapMatrix[robot.X+1][robot.Y] is Empty)
-                    {
-                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X+1][robot.Y];
-                        mapMatrix[robot.X+1][robot.Y] = robot;
-                        robot.X++;
-                    }
+                    robot.moveDown(mapMatrix);
                 } else if (command.Equals("d"))
                 {
-                    if(robot.Y + 1 < dimension && mapMatrix[robot.X][robot.Y+1] is Empty)
-                    {
-                        mapMatrix[robot.X][robot.Y] = mapMatrix[robot.X][robot.Y+1];
-                        mapMatrix[robot.X][robot.Y+1] = robot;
-                        robot.Y++;
-                    }
+                    robot.moveRight(mapMatrix);
                 } else if (command.Equals("g"))
                 {
-                    robot.Bag++;
+                    robot.captureJewel(mapMatrix);
                 }
             } while (running);
         }
