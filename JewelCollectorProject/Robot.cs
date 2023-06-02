@@ -6,12 +6,16 @@ using JewelCollectorProject.Jewels;
 
 namespace JewelCollectorProject
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Robot : Cell
     {
         public int X {get;set;}
         public int Y {get;set;}
         public int Bag {get; set;}
-        public int totalScore {get; set;}
+        public int TotalScore {get; set;}
+        public string? PressedKeyStatus {get; set;}
         public Robot(int xLocation, int yLocation)
         {
             X = xLocation;
@@ -20,43 +24,83 @@ namespace JewelCollectorProject
 
         public void moveUp(List<List<Cell>> map)
         {
-            if(X - 1 >= 0 && map[X-1][Y] is Empty)
+            try
             {
-                map[X][Y] = map[X-1][Y];
-                map[X-1][Y] = this;
-                X--;
+                if(map[X-1][Y] is Empty)
+                {
+                    map[X][Y] = map[X-1][Y];
+                    map[X-1][Y] = this;
+                    X--;
+                    PressedKeyStatus = "w";
+                }
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                
+                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
+            }
+            
         }
 
         public void moveLeft(List<List<Cell>> map) {
-            if(Y - 1 >= 0 && map[X][Y-1] is Empty)
+            try
             {
-                map[X][Y] = map[X][Y-1];
-                map[X][Y-1] = this;
-                Y--;
+                if(map[X][Y-1] is Empty)
+                {
+                    map[X][Y] = map[X][Y-1];
+                    map[X][Y-1] = this;
+                    Y--;
+                    PressedKeyStatus = "a";
+                }
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                
+                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
+            }
+            
         }
 
         public void moveDown(List<List<Cell>> map)
         {
-            if(X + 1 < map.Count && map[X+1][Y] is Empty)
+            try
             {
-                map[X][Y] = map[X+1][Y];
-                map[X+1][Y] = this;
-                X++;
+                if(map[X+1][Y] is Empty)
+                {
+                    map[X][Y] = map[X+1][Y];
+                    map[X+1][Y] = this;
+                    X++;
+                    PressedKeyStatus = "s";
+                }
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                
+                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
+            }
+            
         }
 
-        public void moveRight(List<List<Cell>> map)
+        public string moveRight(List<List<Cell>> map)
         {
             int totalColumns = map.Count > 0 ? map[0].Count : 0;
 
-            if(Y + 1 < totalColumns && map[X][Y+1] is Empty)
+            try
             {
-                map[X][Y] = map[X][Y+1];
-                map[X][Y+1] = this;
-                Y++;
+                if(map[X][Y+1] is Empty)
+                {
+                    map[X][Y] = map[X][Y+1];
+                    map[X][Y+1] = this;
+                    Y++;
+                    PressedKeyStatus = "d";
+                }
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                
+                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
+            }
+            return "";
         }
         
         public void captureJewel(List<List<Cell>> map) {
@@ -64,6 +108,7 @@ namespace JewelCollectorProject
             isJewelDown(map);
             isJewelLeft(map);
             isJewelRight(map);
+            PressedKeyStatus = "g";
         }
 
         private void isJewelUp(List<List<Cell>> map) {
@@ -110,13 +155,13 @@ namespace JewelCollectorProject
         public void score(Cell jewel) {
             if(jewel is RedJewel)
             {
-                totalScore += 100;
+                TotalScore += 100;
             } else if(jewel is GreenJewel)
             {
-                totalScore += 50;
+                TotalScore += 50;
             } else if(jewel is BlueJewel)
             {
-                totalScore += 10;
+                TotalScore += 10;
             }           
         }
 

@@ -4,18 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using JewelCollectorProject.Jewels;
 using JewelCollectorProject.Obstacles;
+using JewelCollectorProject.KeyEvents;
 
-namespace JewelCollectorProject
+namespace JewelCollectorProject.Maps
 {
-    public class Map
+    public class Map : MapTemplate
     {
         private int dimension = 10;
         private List<List<Cell>> mapMatrix = new List<List<Cell>>();
-
         private string exitGame = "";
         private Robot robot = new Robot(0,0);
         private bool running = true;
-        private void createMap()
+        public event KeyPressedEventHandler? KeyPressed;
+        public string? command {get; set;}
+        public Map()
+        {
+            KeyPressed += onKeyPressed;
+        }
+        public override void createMap()
         {
             ObjectPositions positions = new ObjectPositions();
 
@@ -63,7 +69,7 @@ namespace JewelCollectorProject
                 mapMatrix.Add(row);
             }
         }
-        public void printMap()
+        public override void printMap()
         {
             createMap();
             do
@@ -78,28 +84,18 @@ namespace JewelCollectorProject
                     Console.WriteLine();
                 }
                 writeGameStatus();
-                
-                ConsoleKeyInfo keyPressed = Console.ReadKey();
-                string command = keyPressed.KeyChar.ToString();
-                exitGame = exitGame + command;
-                
-                keyPressedAction(command);
+                captureConsoleKey();
+                KeyPressed?.Invoke(command ?? string.Empty);
             } while (running);
         }
 
         private void writeGameStatus()
         {
-            Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: {robot.totalScore}");
-            if(exitGame.Length == 0)
-            {
-                Console.Write($"Enter the command: ");
-            } else
-            {
-                Console.Write($"Enter the command: {exitGame[exitGame.Length-1]}");
-            }           
+            Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: {robot.TotalScore}");
+            Console.Write($"Enter the command: {robot.PressedKeyStatus}");      
         }
 
-        private void keyPressedAction(String keyPressed)
+        private void onKeyPressed(string keyPressed)
         {
             if (exitGame.Contains("quit"))
             {
@@ -120,6 +116,13 @@ namespace JewelCollectorProject
             {
                 robot.captureJewel(mapMatrix);
             }
+        }
+
+        private void captureConsoleKey()
+        {
+            ConsoleKeyInfo keyPressed = Console.ReadKey();
+            command = keyPressed.KeyChar.ToString().ToLower();
+            exitGame = exitGame + command;
         }
     }
 }

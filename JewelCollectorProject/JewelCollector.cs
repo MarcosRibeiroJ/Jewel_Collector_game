@@ -1,4 +1,5 @@
-﻿namespace JewelCollectorProject
+﻿using JewelCollectorProject.Maps;
+namespace JewelCollectorProject
 {
     public class JewelCollector
     {
