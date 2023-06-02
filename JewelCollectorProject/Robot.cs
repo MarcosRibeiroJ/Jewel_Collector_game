@@ -148,11 +148,11 @@ namespace JewelCollectorProject
         }
 
         /// <summary>
-        /// Método que verifica se acima de Robot existe uma célula acima de Robot e se a célula um objeto do tipo IJewel.
+        /// Método que verifica se existe uma célula acima de Robot e se a célula é um objeto do tipo Jewel.
         /// Nesse caso, optei por não utilizar um bloco "try/catch" porque o método irá verificar as 4 direções ao redor de Robot.
         /// Nessa lógica mesmo que ele não consiga coletar acima, talvez existam jóias em outras posições.
         /// Uma mensagem de "MOVIMENTO INVÁLIDO" para coletas acima, poderia não ser verdade para alguma das outras posições.
-        /// A interface IJewel foi criada para não ter necessidade de vericar entre os 3 tipos de jóias, reduzindo o número de validações.
+        /// A classe abstrata Jewel foi criada para não ter necessidade de vericar entre os 3 tipos de jóias, reduzindo o número de validações.
         /// Caso o objeto acima de Robot seja uma jóia, esse objeto é enviado para o método "score" que fará o devido tratamento
         /// Em seguida será incrementado 1 na Bag de Robot para controlar o total de jóias coletadas.
         /// Por último um novo objeto do tipo Empty será instanciado e e adicionado na posição da jóia.
@@ -160,7 +160,7 @@ namespace JewelCollectorProject
         /// <param name="map">Objeto Map necessário para analisar a posição de Robot e dos objetos ao seu redor.</param>
         private void isJewelUp(List<List<Cell>> map) {
             
-            if(X > 0 && map[X-1][Y] is IJewel) {
+            if(X > 0 && map[X-1][Y] is Jewel) {
                 score(map[X-1][Y]);
                 Bag++;
                 Cell cell = new Empty();
@@ -174,7 +174,7 @@ namespace JewelCollectorProject
         /// <param name="map">Objeto Map necessário para analisar a posição de Robot e dos objetos ao seu redor.</param>
         private void isJewelDown(List<List<Cell>> map) {
             
-            if(X < map.Count -1 && map[X+1][Y] is IJewel) {
+            if(X < map.Count -1 && map[X+1][Y] is Jewel) {
                 score(map[X+1][Y]);
                 Bag++;
                 Cell cell = new Empty();
@@ -188,7 +188,7 @@ namespace JewelCollectorProject
         /// <param name="map">Objeto Map necessário para analisar a posição de Robot e dos objetos ao seu redor.</param>
         private void isJewelLeft(List<List<Cell>> map) {
             
-            if(Y > 0 && map[X][Y-1] is IJewel) {
+            if(Y > 0 && map[X][Y-1] is Jewel) {
                 score(map[X][Y-1]);
                 Bag++;
                 Cell cell = new Empty();
@@ -203,7 +203,7 @@ namespace JewelCollectorProject
         private void isJewelRight(List<List<Cell>> map) {
             int totalColumns = map.Count > 0 ? map[0].Count : 0;
 
-            if(Y < totalColumns -1 && map[X][Y+1] is IJewel) {
+            if(Y < totalColumns -1 && map[X][Y+1] is Jewel) {
                 score(map[X][Y+1]);
                 Bag++;
                 Cell cell = new Empty();
@@ -213,20 +213,21 @@ namespace JewelCollectorProject
 
         /// <summary>
         /// Método que recebe um objeto do tipo mais genérico Cell.
-        /// Em seguida de acordo com o tipo de jóia, incrementa na property TotalScore o valor que cada jóia possui.
-        /// Mesmo recebendo como parâmetro um objeto mais genérico Cell, não terei conflitos porque a validação para IJewel já foi realizada anteriormente.
+        /// Em seguida de acordo com o tipo de jóia, incrementa na property TotalScore o valor que cada jóia possui acessando sua propriedade JewelValue.
+        /// Mesmo recebendo como parâmetro um objeto mais genérico Cell, não terei conflitos porque a validação para Jewel já foi realizada anteriormente.
+        /// Porém foi necessário passar novamente o objeto para cada tipo de jóia específica para poder usar seu atributo.
         /// </summary>
         /// <param name="jewel">Objeto do tipo Cell que representa uma jóia.</param>
         public void score(Cell jewel) {
-            if(jewel is RedJewel)
+            if(jewel is RedJewel redJewel)
             {
-                TotalScore += 100;
-            } else if(jewel is GreenJewel)
+                TotalScore += redJewel.JewelValue;
+            } else if(jewel is GreenJewel greenJewel)
             {
-                TotalScore += 50;
-            } else if(jewel is BlueJewel)
+                TotalScore += greenJewel.JewelValue;
+            } else if(jewel is BlueJewel blueJewel)
             {
-                TotalScore += 10;
+                TotalScore += blueJewel.JewelValue;
             }           
         }
 

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace JewelCollectorProject.Jewels
 {
-    public interface IJewel
+    public abstract class Jewel : Cell
     {
+        
         
     }
 }

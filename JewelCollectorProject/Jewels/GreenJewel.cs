@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace JewelCollectorProject.Jewels
 {
-    public class GreenJewel : Cell, IJewel
+    public class GreenJewel : Jewel
     {
+        public int JewelValue {get;} = 50;
+
         public override string ToString()
         {
             return " JG ";
