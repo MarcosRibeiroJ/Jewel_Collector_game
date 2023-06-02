@@ -8,7 +8,7 @@ using JewelCollectorProject.KeyEvents;
 
 namespace JewelCollectorProject.Maps
 {
-    public class Map : MapTemplate
+    public class Map
     {
         private int dimension = 10;
         private List<List<Cell>> mapMatrix = new List<List<Cell>>();
@@ -21,55 +21,21 @@ namespace JewelCollectorProject.Maps
         {
             KeyPressed += onKeyPressed;
         }
-        public override void createMap()
+        
+        public void createMap()
         {
-            ObjectPositions positions = new ObjectPositions();
-
-            for (int i = 0; i < dimension; i++)
+            for(int i = 0; i < dimension; i++)
             {
                 List<Cell> row = new List<Cell>();
                 for (int j = 0; j < dimension; j++)
                 {
-                    if (i == 0 && j == 0)
-                    {
-                        Cell cell = robot;
-                        row.Add(cell);
-                    }
-                    else if (positions.RedJewelPositions.Contains((i, j)))
-                    {
-                        Cell cell = new RedJewel();
-                        row.Add(cell);
-                    }
-                    else if (positions.GreenJewelPositions.Contains((i, j)))
-                    {
-                        Cell cell = new GreenJewel();
-                        row.Add(cell);
-                    }
-                    else if (positions.BlueJewelPositions.Contains((i, j)))
-                    {
-                        Cell cell = new BlueJewel();
-                        row.Add(cell);
-                    }
-                    else if (positions.TreePositions.Contains((i, j)))
-                    {
-                        Cell cell = new Tree();
-                        row.Add(cell);
-                    }
-                    else if (positions.WaterPositions.Contains((i, j)))
-                    {
-                        Cell cell = new Water();
-                        row.Add(cell);
-                    }
-                    else
-                    {
-                        Cell cell = new Empty();
-                        row.Add(cell);
-                    }
+                    row.Add(chooseCellType(i, j));
                 }
                 mapMatrix.Add(row);
             }
         }
-        public override void printMap()
+
+        public void printMap()
         {
             createMap();
             do
@@ -123,6 +89,49 @@ namespace JewelCollectorProject.Maps
             ConsoleKeyInfo keyPressed = Console.ReadKey();
             command = keyPressed.KeyChar.ToString().ToLower();
             exitGame = exitGame + command;
+        }
+        private Cell chooseCellType(int xLocation, int yLocation)
+        {
+            return chooseCellByLocation(xLocation, yLocation);
+        }
+
+        private Cell chooseCellByLocation(int xLocation, int yLocation)
+        {
+            ObjectPositions positions = new ObjectPositions();
+            if (xLocation == 0 && yLocation == 0)
+            {
+                return robot;
+            }
+            else if(positions.RedJewelPositions.Contains((xLocation, yLocation)))
+            {
+                RedJewel redJewel = new RedJewel();
+                return redJewel;
+            }
+            else if(positions.GreenJewelPositions.Contains((xLocation, yLocation)))
+            {
+                GreenJewel greenJewel = new GreenJewel();
+                return greenJewel;
+            }
+            else if(positions.BlueJewelPositions.Contains((xLocation, yLocation)))
+            {
+                BlueJewel blueJewel = new BlueJewel();
+                return blueJewel;
+            }
+            else if(positions.TreePositions.Contains((xLocation, yLocation)))
+            {
+                Tree tree = new Tree();
+                return tree;
+            }
+            else if(positions.WaterPositions.Contains((xLocation, yLocation)))
+            {
+                Water water = new Water();
+                return water;
+            }
+            else
+            {
+                Empty emptyCell = new Empty();
+                return emptyCell;
+            }
         }
     }
 }
