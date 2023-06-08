@@ -30,8 +30,9 @@ namespace JewelCollectorProject.Maps
                 List<Cell> row = new List<Cell>();
                 for (int j = 0; j < dimension; j++)
                 {
-                    mapMatrix[i][j] = new Empty();
+                    row.Add(new Empty());
                 }
+                mapMatrix.Add(row);
             }
             if(dimension == 10)
             {
@@ -49,6 +50,8 @@ namespace JewelCollectorProject.Maps
 
         public void insertFixedCells()
         {
+            insert(robot, 0, 0);
+
             insert(new RedJewel(), 1, 9);
             insert(new RedJewel(), 8, 8);
             insert(new GreenJewel(), 9, 1);
@@ -72,13 +75,72 @@ namespace JewelCollectorProject.Maps
 
         public void insertRandomCells()
         {
+            insert(robot, 0, 0);
+
             for (int i = 0; i <= maxAtomic; i++)
             {
                 Random random = new Random();
-                int x = random.Next(0, dimension);
-                int y = random.Next(0, dimension);
+                int x = random.Next(1, dimension);
+                int y = random.Next(1, dimension);
 
-                insert(new Atomic(), x, y);
+                if(mapMatrix[x][y] is Empty)
+                {
+                    insert(new Atomic(), x, y);
+                }
+            }
+            for (int i = 0; i <= maxWater; i++)
+            {
+                Random random = new Random();
+                int x = random.Next(1, dimension);
+                int y = random.Next(1, dimension);
+
+                if(mapMatrix[x][y] is Empty)
+                {
+                    insert(new Water(), x, y);
+                }
+            }
+            for (int i = 0; i <= maxTree; i++)
+            {
+                Random random = new Random();
+                int x = random.Next(1, dimension);
+                int y = random.Next(1, dimension);
+
+                if(mapMatrix[x][y] is Empty)
+                {
+                    insert(new Tree(), x, y);
+                }
+            }
+            for (int i = 0; i <= maxBlueJewel; i++)
+            {
+                Random random = new Random();
+                int x = random.Next(1, dimension);
+                int y = random.Next(1, dimension);
+
+                if(mapMatrix[x][y] is Empty)
+                {
+                    insert(new BlueJewel(), x, y);
+                }
+            }
+            for (int i = 0; i <= maxGreenJewel; i++)
+            {
+                Random random = new Random();
+                int x = random.Next(1, dimension);
+                int y = random.Next(1, dimension);
+
+                if(mapMatrix[x][y] is Empty)
+                {
+                    insert(new GreenJewel(), x, y);
+                }
+            }
+            for (int i = 0; i <= maxRedJewel; i++)
+            {
+                Random random = new Random();
+                int x = random.Next(1, dimension);
+                int y = random.Next(1, dimension);
+                if(mapMatrix[x][y] is Empty)
+                {
+                    insert(new RedJewel(), x, y);
+                }
             }
         }
 
@@ -167,99 +229,6 @@ namespace JewelCollectorProject.Maps
                 return new Empty();
             }
         }
-
-        /*private Cell chooseCellRandomly(int xLocation, int yLocation)
-        {
-            if (xLocation == 0 && yLocation == 0)
-            {
-                return robot;
-            }
-            else
-            {
-                Random random = new Random();
-                int randomNumber = random.Next(1, 8);
-                if (randomNumber == 1 && mapMatrix.SelectMany(list => list).OfType<Atomic>().Count() <= maxAtomic)
-                {
-                    return new Empty();
-                } else if (randomNumber == 2 && mapMatrix.SelectMany(list => list).OfType<Atomic>().Count() <= maxAtomic)
-                {
-                    maxAtomic--;
-                    return new Atomic();
-                } else if (randomNumber == 3 && mapMatrix.SelectMany(list => list).OfType<Water>().Count() <= maxWater)
-                {
-                    maxWater--;
-                    return new Water();
-                } else if (randomNumber == 4 && mapMatrix.SelectMany(list => list).OfType<BlueJewel>().Count() <= maxBlueJewel)
-                {
-                    maxBlueJewel--;
-                    return new BlueJewel();
-                } else if (randomNumber == 5 && mapMatrix.SelectMany(list => list).OfType<GreenJewel>().Count()<= maxGreenJewel)
-                {
-                    maxGreenJewel--;
-                    return new GreenJewel();
-                } else if (randomNumber == 6 && mapMatrix.SelectMany(list => list).OfType<RedJewel>().Count()<= maxRedJewel)
-                {
-                    maxRedJewel--;
-                    return new RedJewel();
-                } else if (randomNumber == 7 && mapMatrix.SelectMany(list => list).OfType<Tree>().Count()<= maxTree)
-                {
-                    maxTree--;
-                    return new Tree();
-                } else
-                {
-                    return new Empty();
-                }
-            }
-        }*/
-
-        /*private Cell chooseCellRandomly(int xLocation, int yLocation)
-        {
-            if (xLocation == 0 && yLocation == 0)
-            {
-                return robot;
-            }
-            else
-            {
-                List<Cell> cellTypes = new List<Cell>
-                {
-                    new Empty(),
-                    new Atomic(),
-                    new Water(),
-                    new BlueJewel(),
-                    new GreenJewel(),
-                    new RedJewel(),
-                    new Tree()
-                };
-
-                Random random = new Random();
-                int randomCell = random.Next(cellTypes.Count);
-
-                Cell selectedCell = cellTypes[randomCell];
-
-                if (selectedCell is Atomic && mapMatrix.SelectMany(list => list).OfType<Atomic>().Count() >= maxAtomic)
-                {
-                    selectedCell = new Empty();
-                } else if (selectedCell is Water && mapMatrix.SelectMany(list => list).OfType<Water>().Count() >= maxWater)
-                {
-                    selectedCell = new Empty();
-                } else if (selectedCell is BlueJewel && mapMatrix.SelectMany(list => list).OfType<BlueJewel>().Count() >= maxBlueJewel)
-                {
-                    selectedCell = new Empty();
-                } else if (selectedCell is GreenJewel && mapMatrix.SelectMany(list => list).OfType<GreenJewel>().Count() >= maxGreenJewel)
-                {
-                    selectedCell = new Empty();
-                } else if (selectedCell is RedJewel && mapMatrix.SelectMany(list => list).OfType<RedJewel>().Count() >= maxRedJewel)
-                {
-                    selectedCell = new Empty();
-                } else if (selectedCell is Tree && mapMatrix.SelectMany(list => list).OfType<Tree>().Count() >= maxTree)
-                {
-                    selectedCell = new Empty();
-                }
-                return selectedCell;
-            }
-        }*/
-
-
         private void nextFase()
         {
             dimension++;
