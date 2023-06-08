@@ -30,15 +30,55 @@ namespace JewelCollectorProject.Maps
                 List<Cell> row = new List<Cell>();
                 for (int j = 0; j < dimension; j++)
                 {
-                    if(dimension == 10)
-                    {
-                        row.Add(chooseCellByLocation(i, j));
-                    } else
-                    {
-                        //row.Add(chooseCellRandomly(i, j));
-                    }
+                    mapMatrix[i][j] = new Empty();
                 }
-                mapMatrix.Add(row);
+            }
+            if(dimension == 10)
+            {
+                insertFixedCells();
+            } else
+            {
+                insertRandomCells();
+            }
+        }
+
+        public void insert(Cell cell, int xLocation, int yLocation)
+        {
+            mapMatrix[xLocation][yLocation] = cell;
+        }
+
+        public void insertFixedCells()
+        {
+            insert(new RedJewel(), 1, 9);
+            insert(new RedJewel(), 8, 8);
+            insert(new GreenJewel(), 9, 1);
+            insert(new GreenJewel(), 7, 6);
+            insert(new BlueJewel(), 3, 4);
+            insert(new BlueJewel(), 2, 1);
+
+            insert(new Water(), 5, 0);
+            insert(new Water(), 5, 1);
+            insert(new Water(), 5, 2);
+            insert(new Water(), 5, 3);
+            insert(new Water(), 5, 4);
+            insert(new Water(), 5, 5);
+            insert(new Water(), 5, 6);
+            insert(new Tree(), 5, 9);
+            insert(new Tree(), 3, 9);
+            insert(new Tree(), 8, 3);
+            insert(new Tree(), 2, 5);
+            insert(new Tree(), 1, 4);
+        }
+
+        public void insertRandomCells()
+        {
+            for (int i = 0; i <= maxAtomic; i++)
+            {
+                Random random = new Random();
+                int x = random.Next(0, dimension);
+                int y = random.Next(0, dimension);
+
+                insert(new Atomic(), x, y);
             }
         }
 
