@@ -35,7 +35,7 @@ namespace JewelCollectorProject.Maps
                         row.Add(chooseCellByLocation(i, j));
                     } else
                     {
-                        row.Add(chooseCellRandomly(i, j));
+                        //row.Add(chooseCellRandomly(i, j));
                     }
                 }
                 mapMatrix.Add(row);
@@ -172,7 +172,7 @@ namespace JewelCollectorProject.Maps
             }
         }*/
 
-        private Cell chooseCellRandomly(int xLocation, int yLocation)
+        /*private Cell chooseCellRandomly(int xLocation, int yLocation)
         {
             if (xLocation == 0 && yLocation == 0)
             {
@@ -217,7 +217,7 @@ namespace JewelCollectorProject.Maps
                 }
                 return selectedCell;
             }
-        }
+        }*/
 
 
         private void nextFase()
