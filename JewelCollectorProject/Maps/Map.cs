@@ -196,39 +196,6 @@ namespace JewelCollectorProject.Maps
             command = keyPressed.KeyChar.ToString().ToLower();
             exitGame = exitGame + command;
         }
-        
-        private Cell chooseCellByLocation(int xLocation, int yLocation)
-        {
-            ObjectPositions positions = new ObjectPositions();
-            if (xLocation == 0 && yLocation == 0)
-            {
-                return robot;
-            }
-            else if(positions.RedJewelPositions.Contains((xLocation, yLocation)))
-            {
-                return new RedJewel();
-            }
-            else if(positions.GreenJewelPositions.Contains((xLocation, yLocation)))
-            {
-                return new GreenJewel();
-            }
-            else if(positions.BlueJewelPositions.Contains((xLocation, yLocation)))
-            {
-                return new BlueJewel();
-            }
-            else if(positions.TreePositions.Contains((xLocation, yLocation)))
-            {
-                return new Tree();
-            }
-            else if(positions.WaterPositions.Contains((xLocation, yLocation)))
-            {
-                return new Water();
-            }
-            else
-            {
-                return new Empty();
-            }
-        }
         private void nextFase()
         {
             dimension++;
