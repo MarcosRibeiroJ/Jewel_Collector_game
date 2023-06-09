@@ -13,7 +13,7 @@ namespace JewelCollectorProject.Maps
         private int dimension = 10;
         private int maxTree, maxRedJewel, maxGreenJewel, maxBlueJewel, maxWater, maxAtomic;
         private List<List<Cell>> mapMatrix = new List<List<Cell>>();
-        private string exitGame = "";
+        private string? exit;
         private Robot robot = new Robot(0,0);
         private bool running = true;
         public event KeyPressedEventHandler? KeyPressed;
@@ -195,9 +195,11 @@ namespace JewelCollectorProject.Maps
                 case "a": robot.moveLeft(mapMatrix); break;
                 case "d": robot.moveRight(mapMatrix); break;
                 case "g": robot.captureOrRecharge(mapMatrix); break;
+                case "q": exitGame(); break;
+                case "r": break;
                 case "y": resetGame(); printMap(); break;
                 case "n":
-                case "q": running = false; break;
+                case "quit": running = false; break;
             }
         }
 
@@ -205,7 +207,6 @@ namespace JewelCollectorProject.Maps
         {
             ConsoleKeyInfo keyPressed = Console.ReadKey();
             command = keyPressed.KeyChar.ToString().ToLower();
-            exitGame = exitGame + command;
         }
         private void nextFase()
         {
@@ -237,6 +238,14 @@ namespace JewelCollectorProject.Maps
             robot.Y = 0;
             robot.Fuel = 5;
             mapMatrix.Clear();
+        }
+
+        public void exitGame()
+        {
+            Console.Clear();
+            Console.Write("Digite quit + <ENTER> se deseja sair do jogo ou r + <ENTER> para retornar: ");
+            exit = Console.ReadLine();
+            onKeyPressed(exit ?? string.Empty);
         }
     }
 }
