@@ -159,6 +159,7 @@ namespace JewelCollectorProject.Maps
                 if(robot.Fuel == 0)
                 {
                     gameOver();
+                    break;
                 }
                 Console.Clear();
                 foreach (List<Cell> row in mapMatrix)
@@ -194,7 +195,9 @@ namespace JewelCollectorProject.Maps
                 case "a": robot.moveLeft(mapMatrix); break;
                 case "d": robot.moveRight(mapMatrix); break;
                 case "g": robot.captureOrRecharge(mapMatrix); break;
-                case "quit": running = false; break;
+                case "y": resetGame(); printMap(); break;
+                case "n":
+                case "q": running = false; break;
             }
         }
 
@@ -223,14 +226,7 @@ namespace JewelCollectorProject.Maps
             Console.WriteLine("GAME OVER :(");
             Console.Write("Deseja jogar novamente? (y/n): ");
             captureConsoleKey();
-            if(command.Equals("y"))
-            {
-                resetGame();
-                printMap();
-            } else
-            {
-                running = false;
-            }
+            KeyPressed?.Invoke(command ?? string.Empty);
         }
 
         public void resetGame()
