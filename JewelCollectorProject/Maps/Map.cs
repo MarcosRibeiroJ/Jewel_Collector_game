@@ -156,7 +156,7 @@ namespace JewelCollectorProject.Maps
                 {
                     nextFase();
                 }
-                if(robot.Fuel == 0)
+                if(robot.Fuel == 0 && dimension > 10)
                 {
                     gameOver();
                     break;
@@ -237,6 +237,7 @@ namespace JewelCollectorProject.Maps
             robot.X = 0;
             robot.Y = 0;
             robot.Fuel = 5;
+            dimension = 10;
             mapMatrix.Clear();
         }
 
