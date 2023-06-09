@@ -30,6 +30,7 @@ namespace JewelCollectorProject
                     map[X][Y] = map[X-1][Y];
                     map[X-1][Y] = this;
                     X--;
+                    Fuel--;
                     PressedKeyStatus = "w";
                 }
             }
@@ -49,6 +50,7 @@ namespace JewelCollectorProject
                     map[X][Y] = map[X][Y-1];
                     map[X][Y-1] = this;
                     Y--;
+                    Fuel--;
                     PressedKeyStatus = "a";
                 }
             }
@@ -69,6 +71,7 @@ namespace JewelCollectorProject
                     map[X][Y] = map[X+1][Y];
                     map[X+1][Y] = this;
                     X++;
+                    Fuel--;
                     PressedKeyStatus = "s";
                 }
             }
@@ -91,6 +94,7 @@ namespace JewelCollectorProject
                     map[X][Y] = map[X][Y+1];
                     map[X][Y+1] = this;
                     Y++;
+                    Fuel--;
                     PressedKeyStatus = "d";
                 }
             }
