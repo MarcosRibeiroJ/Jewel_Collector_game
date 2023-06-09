@@ -156,6 +156,10 @@ namespace JewelCollectorProject.Maps
                 {
                     nextFase();
                 }
+                if(robot.Fuel == 0)
+                {
+                    gameOver();
+                }
                 Console.Clear();
                 foreach (List<Cell> row in mapMatrix)
                 {
@@ -202,13 +206,8 @@ namespace JewelCollectorProject.Maps
         }
         private void nextFase()
         {
+            resetGame();
             dimension++;
-            robot.Bag = 0;
-            robot.TotalScore = 0;
-            robot.X = 0;
-            robot.Y = 0;
-            robot.Fuel = 5;
-            mapMatrix.Clear();
             maxTree = (int)Math.Round(((dimension * dimension) - 1) * 0.1);
             maxRedJewel = (int)Math.Round(((dimension * dimension) - 1) * 0.1);
             maxGreenJewel = (int)Math.Round(((dimension * dimension) - 1) * 0.1);
@@ -216,6 +215,32 @@ namespace JewelCollectorProject.Maps
             maxWater = (int)Math.Round(((dimension * dimension) - 1) * 0.1);
             maxAtomic = (int)Math.Round(((dimension * dimension) - 1) * 0.01);
             createMap();
+        }
+
+        public void gameOver()
+        {
+            Console.Clear();
+            Console.WriteLine("GAME OVER :(");
+            Console.Write("Deseja jogar novamente? (y/n): ");
+            captureConsoleKey();
+            if(command.Equals("y"))
+            {
+                resetGame();
+                printMap();
+            } else
+            {
+                running = false;
+            }
+        }
+
+        public void resetGame()
+        {
+            robot.Bag = 0;
+            robot.TotalScore = 0;
+            robot.X = 0;
+            robot.Y = 0;
+            robot.Fuel = 5;
+            mapMatrix.Clear();
         }
     }
 }
