@@ -7,7 +7,10 @@ namespace JewelCollectorProject.Jewels
 {
     public abstract class Jewel : Cell
     {
-        
-        
+        public int JewelValue {get; private set;}
+        public Jewel(int value)
+        {
+            this.JewelValue = value;
+        }
     }
 }

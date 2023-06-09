@@ -8,5 +8,6 @@ namespace JewelCollectorProject
     public abstract class Cell
     {
         public abstract override string ToString();
+        //public abstract bool isRechargeable();
     }
 }

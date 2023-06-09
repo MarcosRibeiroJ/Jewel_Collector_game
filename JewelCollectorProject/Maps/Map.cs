@@ -173,6 +173,10 @@ namespace JewelCollectorProject.Maps
 
         private void writeGameStatus()
         {
+            if(dimension > 10)
+            {
+                Console.WriteLine($"Fuel: {robot.Fuel}");
+            }
             Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: {robot.TotalScore}");
             Console.Write($"Enter the command: {robot.PressedKeyStatus}");
         }
@@ -185,7 +189,7 @@ namespace JewelCollectorProject.Maps
                 case "s": robot.moveDown(mapMatrix); break;
                 case "a": robot.moveLeft(mapMatrix); break;
                 case "d": robot.moveRight(mapMatrix); break;
-                case "g": robot.captureJewel(mapMatrix); break;
+                case "g": robot.captureOrRecharge(mapMatrix); break;
                 case "quit": running = false; break;
             }
         }
@@ -203,6 +207,7 @@ namespace JewelCollectorProject.Maps
             robot.TotalScore = 0;
             robot.X = 0;
             robot.Y = 0;
+            robot.Fuel = 5;
             mapMatrix.Clear();
             maxTree = (int)Math.Round(((dimension * dimension) - 1) * 0.1);
             maxRedJewel = (int)Math.Round(((dimension * dimension) - 1) * 0.1);

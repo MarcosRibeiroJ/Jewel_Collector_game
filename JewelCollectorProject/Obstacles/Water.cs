@@ -10,6 +10,10 @@ namespace JewelCollectorProject.Obstacles
     /// </summary>
     public class Water : Cell
     {
+        /*public override bool isRechargeable()
+        {
+            return false;
+        }*/
         /// <summary>
         /// Reescrita do método ToString herdado da classe abstrata Cell
         /// </summary>

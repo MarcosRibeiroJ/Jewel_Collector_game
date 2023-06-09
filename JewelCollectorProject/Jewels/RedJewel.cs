@@ -7,8 +7,8 @@ namespace JewelCollectorProject.Jewels
 {
     public class RedJewel : Jewel
     {
-        public int JewelValue {get;} = 100;
-        
+        public RedJewel() : base(100){}
+
         public override string ToString()
         {
             return " JR ";
