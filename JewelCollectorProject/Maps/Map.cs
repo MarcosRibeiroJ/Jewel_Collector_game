@@ -12,6 +12,7 @@ namespace JewelCollectorProject.Maps
     {
         private int dimension = 10;
         private int maxTree, maxRedJewel, maxGreenJewel, maxBlueJewel, maxWater, maxAtomic;
+        private int level = 1;
         private List<List<Cell>> mapMatrix = new List<List<Cell>>();
         private string? exit;
         private Robot robot = new Robot(0,0);
@@ -154,7 +155,8 @@ namespace JewelCollectorProject.Maps
             {
                 if(mapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
                 {
-                    nextFase();
+                    nextLevel();
+                    level++;
                 }
                 if(robot.Fuel == 0 && dimension > 10)
                 {
@@ -180,7 +182,7 @@ namespace JewelCollectorProject.Maps
         {
             if(dimension > 10)
             {
-                Console.WriteLine($"Fuel: {robot.Fuel}");
+                Console.WriteLine($"Fuel: {robot.Fuel} | Level: {level}");
             }
             Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: {robot.TotalScore}");
             Console.Write($"Enter the command: {robot.PressedKeyStatus}");
@@ -208,7 +210,7 @@ namespace JewelCollectorProject.Maps
             ConsoleKeyInfo keyPressed = Console.ReadKey();
             command = keyPressed.KeyChar.ToString().ToLower();
         }
-        private void nextFase()
+        private void nextLevel()
         {
             resetGame();
             dimension++;
@@ -223,6 +225,8 @@ namespace JewelCollectorProject.Maps
 
         public void gameOver()
         {
+            dimension = 10;
+            level = 1;
             Console.Clear();
             Console.WriteLine("GAME OVER :(");
             Console.Write("Deseja jogar novamente? (y/n): ");
@@ -237,7 +241,6 @@ namespace JewelCollectorProject.Maps
             robot.X = 0;
             robot.Y = 0;
             robot.Fuel = 5;
-            dimension = 10;
             mapMatrix.Clear();
         }
 
