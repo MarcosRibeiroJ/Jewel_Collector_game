@@ -4,8 +4,8 @@ namespace JewelCollectorProject
     public class JewelCollector
     {
         public static void Main() {
-            Map map = new Map();
-            map.printMap();
+            Game newGame = new Game(11);
+            newGame.startGame();
         }
     }
 }
