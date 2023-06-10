@@ -158,7 +158,7 @@ namespace JewelCollectorProject.Maps
                     nextLevel();
                     level++;
                 }
-                if(robot.Fuel == 0 && dimension > 10)
+                if(robot.Fuel <= 0 && dimension > 10)
                 {
                     gameOver();
                     break;
