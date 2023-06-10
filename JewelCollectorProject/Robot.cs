@@ -152,7 +152,7 @@ namespace JewelCollectorProject
                 useJewel(map[X-1][Y]);
                 Cell cell = new Empty();
                 map[X-1][Y] = cell;
-            } else if(X > 0 && map[X-1][Y] is Tree)
+            } else if(X > 0 && map[X-1][Y] is Tree && map.Count > 10)
             {
                 useTree(map[X-1][Y]);
             }
@@ -165,7 +165,7 @@ namespace JewelCollectorProject
                 useJewel(map[X+1][Y]);
                 Cell cell = new Empty();
                 map[X+1][Y] = cell;
-            } else if(X < map.Count -1 && map[X+1][Y] is Tree)
+            } else if(X < map.Count -1 && map[X+1][Y] is Tree && map.Count > 10)
             {
                 useTree(map[X+1][Y]);
             }
@@ -178,7 +178,7 @@ namespace JewelCollectorProject
                 useJewel(map[X][Y-1]);
                 Cell cell = new Empty();
                 map[X][Y-1] = cell;
-            } else if(Y > 0 && map[X][Y-1] is Tree)
+            } else if(Y > 0 && map[X][Y-1] is Tree && map.Count > 10)
             {
                 useTree(map[X][Y-1]);
             }
@@ -191,7 +191,7 @@ namespace JewelCollectorProject
                 useJewel(map[X][Y+1]);
                 Cell cell = new Empty();
                 map[X][Y+1] = cell;
-            } else if(Y < map.Count -1 && map[X][Y+1] is Tree)
+            } else if(Y < map.Count -1 && map[X][Y+1] is Tree && map.Count > 10)
             {
                 useTree(map[X][Y+1]);
             }
