@@ -35,7 +35,7 @@ namespace JewelCollectorProject
             } while (running);
         }
 
-        public void checkGameStatus()
+        private void checkGameStatus()
         {
             if(dimension == 30 && map.MapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
             {
@@ -126,10 +126,10 @@ namespace JewelCollectorProject
                     gameOver();break;
             }
         }
-        public void gameWin()
+        private void gameWin()
         {
             Console.Clear();
-            Console.Write("PARABÉNS!! VOCÊ COLETOU TODAS AS JÓIAS PERDIDAS!! :)");
+            Console.WriteLine("PARABÉNS!! VOCÊ COLETOU TODAS AS JÓIAS PERDIDAS!! :)");
             running = false;
         }
     }
