@@ -224,12 +224,24 @@ namespace JewelCollectorProject
 
         private void checkRadioactivity(List<List<Cell>> map)
         {
+            int totalAtomicElements = 0;
             try
             {
-                if(map[X+1][Y] is Atomic || map[X-1][Y] is Atomic || map[X][Y+1] is Atomic || map[X][Y-1] is Atomic)
+                for (int i = -1; i < 2; i++)
                 {
-                    Fuel -= Atomic.DamageArea;
-                }   
+                    if(map[X+i][Y] is Atomic)
+                    {
+                        totalAtomicElements++;
+                    }    
+                }
+                for (int i = -1; i < 2; i++)
+                {
+                    if(map[X][Y+i] is Atomic)
+                    {
+                        totalAtomicElements++;
+                    }    
+                }
+                Fuel -= Atomic.DamageArea * totalAtomicElements; 
             }
             catch (ArgumentOutOfRangeException)
             {
