@@ -9,6 +9,7 @@ namespace JewelCollectorProject
     {
         public override string ToString()
         {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             return " -- ";
         }
     }

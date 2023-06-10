@@ -11,6 +11,7 @@ namespace JewelCollectorProject.Jewels
 
         public override string ToString()
         {
+            Console.BackgroundColor = ConsoleColor.Red;
             return " JR ";
         }
     }

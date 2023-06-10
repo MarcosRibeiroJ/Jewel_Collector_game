@@ -13,6 +13,7 @@ namespace JewelCollectorProject.Jewels
         
         public override string ToString()
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
             return " JB ";
         }
     }

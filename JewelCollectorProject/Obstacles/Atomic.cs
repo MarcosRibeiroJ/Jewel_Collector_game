@@ -9,8 +9,10 @@ namespace JewelCollectorProject.Obstacles
     {
         public static int DamageArea {get;} = 10;
         public static int Damage {get;} = 30;
+        
         public override string ToString()
         {
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
             return " !! ";
         }
     }

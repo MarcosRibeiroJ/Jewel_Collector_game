@@ -20,6 +20,7 @@ namespace JewelCollectorProject.Obstacles
         /// <returns>Retorna a impressão visual de água no jogo.</returns>
         public override string ToString()
         {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             return " ## ";
         }
     }

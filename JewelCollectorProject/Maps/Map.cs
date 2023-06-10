@@ -48,6 +48,7 @@ namespace JewelCollectorProject.Maps
                     foreach (Cell cell in row)
                     {
                         Console.Write(cell);
+                        Console.ResetColor();
                     }
                     Console.WriteLine();
                 }
