@@ -37,7 +37,10 @@ namespace JewelCollectorProject
 
         public void checkGameStatus()
         {
-            if(map.MapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
+            if(dimension == 30 && map.MapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
+            {
+                gameWin();
+            }else if(map.MapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
             {
                 nextLevel();
             } else if(map.Robot.Fuel <= 0 && dimension > 10)
@@ -122,6 +125,12 @@ namespace JewelCollectorProject
                     Thread.Sleep(2000);
                     gameOver();break;
             }
+        }
+        public void gameWin()
+        {
+            Console.Clear();
+            Console.Write("PARABÉNS!! VOCÊ COLETOU TODAS AS JÓIAS PERDIDAS!! :)");
+            running = false;
         }
     }
 }
