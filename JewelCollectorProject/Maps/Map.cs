@@ -24,7 +24,39 @@ namespace JewelCollectorProject.Maps
             KeyPressed += onKeyPressed;
         }
         
-        public void createMap()
+        public void printMap()
+        {
+            if(mapMatrix.Count == 0)
+            {
+                createMap();
+            }
+            do
+            {
+                if(mapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
+                {
+                    nextLevel();
+                    level++;
+                }
+                if(robot.Fuel <= 0 && dimension > 10)
+                {
+                    gameOver();
+                    break;
+                }
+                Console.Clear();
+                foreach (List<Cell> row in mapMatrix)
+                {
+                    foreach (Cell cell in row)
+                    {
+                        Console.Write(cell);
+                    }
+                    Console.WriteLine();
+                }
+                writeGameStatus();
+                captureConsoleKey();
+                KeyPressed?.Invoke(command ?? string.Empty);
+            } while (running);
+        }
+        private void createMap()
         {
             for(int i = 0; i < dimension; i++)
             {
@@ -44,12 +76,7 @@ namespace JewelCollectorProject.Maps
             }
         }
 
-        public void insert(Cell cell, int xLocation, int yLocation)
-        {
-            mapMatrix[xLocation][yLocation] = cell;
-        }
-
-        public void insertFixedCells()
+        private void insertFixedCells()
         {
             insert(robot, 0, 0);
 
@@ -74,7 +101,7 @@ namespace JewelCollectorProject.Maps
             insert(new Tree(), 1, 4);
         }
 
-        public void insertRandomCells()
+        private void insertRandomCells()
         {
             insert(robot, 0, 0);
 
@@ -145,37 +172,9 @@ namespace JewelCollectorProject.Maps
             }
         }
 
-        public void printMap()
+        private void insert(Cell cell, int xLocation, int yLocation)
         {
-            if(mapMatrix.Count == 0)
-            {
-                createMap();
-            }
-            do
-            {
-                if(mapMatrix.SelectMany(list => list).OfType<Jewel>().Count() == 0)
-                {
-                    nextLevel();
-                    level++;
-                }
-                if(robot.Fuel <= 0 && dimension > 10)
-                {
-                    gameOver();
-                    break;
-                }
-                Console.Clear();
-                foreach (List<Cell> row in mapMatrix)
-                {
-                    foreach (Cell cell in row)
-                    {
-                        Console.Write(cell);
-                    }
-                    Console.WriteLine();
-                }
-                writeGameStatus();
-                captureConsoleKey();
-                KeyPressed?.Invoke(command ?? string.Empty);
-            } while (running);
+            mapMatrix[xLocation][yLocation] = cell;
         }
 
         private void writeGameStatus()
@@ -186,6 +185,12 @@ namespace JewelCollectorProject.Maps
             }
             Console.WriteLine($"Bag total items: {robot.Bag} | Bag total value: {robot.TotalScore}");
             Console.Write($"Enter the command: {robot.PressedKeyStatus}");
+        }
+
+        private void captureConsoleKey()
+        {
+            ConsoleKeyInfo keyPressed = Console.ReadKey();
+            command = keyPressed.KeyChar.ToString().ToLower();
         }
 
         private void onKeyPressed(string keyPressed)
@@ -199,17 +204,11 @@ namespace JewelCollectorProject.Maps
                 case "g": robot.captureOrRecharge(mapMatrix); break;
                 case "q": exitGame(); break;
                 case "r": break;
-                case "y": resetGame(); printMap(); break;
-                case "n":
                 case "quit": running = false; break;
+                default : robot.PressedKeyStatus = "TECLA INVÁLIDA"; break;
             }
         }
 
-        private void captureConsoleKey()
-        {
-            ConsoleKeyInfo keyPressed = Console.ReadKey();
-            command = keyPressed.KeyChar.ToString().ToLower();
-        }
         private void nextLevel()
         {
             resetGame();
@@ -223,18 +222,7 @@ namespace JewelCollectorProject.Maps
             createMap();
         }
 
-        public void gameOver()
-        {
-            dimension = 10;
-            level = 1;
-            Console.Clear();
-            Console.WriteLine("GAME OVER :(");
-            Console.Write("Deseja jogar novamente? (y/n): ");
-            captureConsoleKey();
-            KeyPressed?.Invoke(command ?? string.Empty);
-        }
-
-        public void resetGame()
+        private void resetGame()
         {
             robot.Bag = 0;
             robot.TotalScore = 0;
@@ -244,12 +232,32 @@ namespace JewelCollectorProject.Maps
             mapMatrix.Clear();
         }
 
-        public void exitGame()
+        private void exitGame()
         {
             Console.Clear();
             Console.Write("Digite quit + <ENTER> se deseja sair do jogo ou r + <ENTER> para retornar: ");
             exit = Console.ReadLine();
             onKeyPressed(exit ?? string.Empty);
+        }
+        
+        private void gameOver()
+        {
+            dimension = 10;
+            level = 1;
+            Console.Clear();
+            Console.WriteLine("GAME OVER :(");
+            Console.Write("Deseja jogar novamente? (y/n): ");
+            captureConsoleKey();
+            switch (command)
+            {
+                case "y": resetGame(); printMap(); break;
+                case "n": running = false; break;
+                default:
+                    Console.Clear();
+                    Console.Write("TECLA INVÁLIDA");
+                    Thread.Sleep(2000);
+                    gameOver();break;
+            }
         }
     }
 }
