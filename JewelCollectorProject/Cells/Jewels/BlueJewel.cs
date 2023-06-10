@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JewelCollectorProject;
 
-namespace JewelCollectorProject.Jewels
+namespace JewelCollectorProject.Cells.Jewels
 {
     public class BlueJewel : Jewel
     {

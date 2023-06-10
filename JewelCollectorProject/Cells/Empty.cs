@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JewelCollectorProject
+namespace JewelCollectorProject.Cells
 {
     public class Empty : Cell
     {

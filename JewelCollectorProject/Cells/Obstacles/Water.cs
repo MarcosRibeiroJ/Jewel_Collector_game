@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JewelCollectorProject.Obstacles
+namespace JewelCollectorProject.Cells.Obstacles
 {
     /// <summary>
     /// Classe que no jogo será usada como obstáculo para Robot.
     /// </summary>
     public class Water : Cell
     {
-        /*public override bool isRechargeable()
-        {
-            return false;
-        }*/
         /// <summary>
         /// Reescrita do método ToString herdado da classe abstrata Cell
         /// </summary>

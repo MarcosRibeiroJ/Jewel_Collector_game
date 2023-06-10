@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JewelCollectorProject.Jewels;
-using JewelCollectorProject.Obstacles;
+using JewelCollectorProject.Cells.Jewels;
+using JewelCollectorProject.Cells.Obstacles;
 
-namespace JewelCollectorProject
+namespace JewelCollectorProject.Cells
 {
     public class Robot : Cell
     {

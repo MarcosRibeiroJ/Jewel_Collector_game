@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JewelCollectorProject.Maps;
 using JewelCollectorProject.KeyEvents;
-using JewelCollectorProject.Jewels;
+using JewelCollectorProject.Cells.Jewels;
 
 namespace JewelCollectorProject
 {
