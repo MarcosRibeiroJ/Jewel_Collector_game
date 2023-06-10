@@ -14,11 +14,6 @@ namespace JewelCollectorProject.Maps
         private int maxTree, maxRedJewel, maxGreenJewel, maxBlueJewel, maxWater, maxAtomic;
         public Robot Robot {get;} = new Robot(0,0);
         
-        public Map()
-        {
-            
-        }
-        
         public void printMap()
         {
             Console.Clear();

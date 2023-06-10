@@ -110,11 +110,11 @@ namespace JewelCollectorProject
             level = 1;
             Console.Clear();
             Console.WriteLine("GAME OVER :(");
-            Console.Write("Deseja jogar novamente? (y/n): ");
+            Console.Write("Deseja reiniciar o jogo? (y/n): ");
             captureConsoleKey();
             switch (Command)
             {
-                case "y": resetGame(); map.printMap(); break;
+                case "y": resetGame(); map.createMap(dimension); map.printMap(); break;
                 case "n": running = false; break;
                 default:
                     Console.Clear();
