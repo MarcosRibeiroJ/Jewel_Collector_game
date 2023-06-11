@@ -18,7 +18,7 @@ O objetivo do jogo é conduzir um robô por um mapa 2D, coletando joias e desvia
  - D (movimenta o robô uma casa para à direita).
  - G (coleta joias ou recarrega o robô).
 
-## Simbolos de cada elemento
+## Símbolos de cada elemento
 
 - **JB** (JewelBlue) Representa as joias do tipo Blue Jewel.
 - **JG** (JewelGreen) Representa as joias do tipo Green Jewel.
