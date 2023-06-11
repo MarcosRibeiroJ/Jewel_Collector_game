@@ -11,7 +11,7 @@ namespace JewelCollectorProject.Cells.Obstacles
     public class Water : Cell
     {
         /// <summary>
-        /// Sobrescrita do método ToString herdado da classe abstrata Cell
+        /// Sobrescrita do método ToString herdado da classe abstrata Cell.
         /// </summary>
         /// <returns>Retorna a impressão visual de água no jogo formatada na cor de fundo azul escuro e cor de texto branco.</returns>
         public override string ToString()
