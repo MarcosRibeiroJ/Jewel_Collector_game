@@ -138,7 +138,7 @@ namespace JewelCollectorProject
                 case "s": map.Robot.moveDown(map.MapMatrix); break;
                 case "a": map.Robot.moveLeft(map.MapMatrix); break;
                 case "d": map.Robot.moveRight(map.MapMatrix); break;
-                case "g": map.Robot.captureOrRecharge(map.MapMatrix); break;
+                case "g": map.Robot.PressedKeyStatus = "g"; map.Robot.captureOrRecharge(map.MapMatrix); break;
                 case "q": exitGame(); break;
                 default : map.Robot.PressedKeyStatus = "TECLA INVÁLIDA"; break;
             }

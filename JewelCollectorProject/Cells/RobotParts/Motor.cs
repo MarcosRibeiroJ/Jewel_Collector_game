@@ -19,7 +19,7 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation-1][yLocation] = robot;
                     robot.X--;
                     robot.Fuel--;
-                    radar.checkRadioactivity(map, robot);
+                    radar.check(map, robot);
                     robot.PressedKeyStatus = "w";
                 } else if(map[xLocation-1][yLocation] is Atomic)
                 {
@@ -48,7 +48,7 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation+1][yLocation] = robot;
                     robot.X++;
                     robot.Fuel--;
-                    radar.checkRadioactivity(map, robot);
+                    radar.check(map, robot);
                     robot.PressedKeyStatus = "s";
                 } else if(map[xLocation+1][yLocation] is Atomic)
                 {
@@ -76,7 +76,7 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation][yLocation-1] = robot;
                     robot.Y--;
                     robot.Fuel--;
-                    radar.checkRadioactivity(map, robot);
+                    radar.check(map, robot);
                     robot.PressedKeyStatus = "a";
                 }else if(map[xLocation][yLocation-1] is Atomic)
                 {
@@ -105,7 +105,7 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation][yLocation+1] = robot;
                     robot.Y++;
                     robot.Fuel--;
-                    radar.checkRadioactivity(map, robot);
+                    radar.check(map, robot);
                     robot.PressedKeyStatus = "d";
                 } else if(map[xLocation][yLocation+1] is Atomic)
                 {

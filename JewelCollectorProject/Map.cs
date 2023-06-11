@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JewelCollectorProject.Cells;
 using JewelCollectorProject.Cells.Jewels;
 using JewelCollectorProject.Cells.Obstacles;
+using JewelCollectorProject.Cells.RobotParts;
 
 namespace JewelCollectorProject.Maps
 {
