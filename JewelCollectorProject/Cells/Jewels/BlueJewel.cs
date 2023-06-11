@@ -7,7 +7,7 @@ using JewelCollectorProject;
 namespace JewelCollectorProject.Cells.Jewels
 {
     /// <summary>
-    /// Classe que herda de Jewel
+    /// Classe que herda de Jewel.
     /// Possui o atributo herdado JewelValue e um atributo interno chamado FuelValue, representando o valor de combustível que fornece ao robô.
     /// </summary>
     public class BlueJewel : Jewel
