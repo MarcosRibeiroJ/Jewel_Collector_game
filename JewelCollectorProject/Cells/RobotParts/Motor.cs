@@ -19,15 +19,14 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation-1][yLocation] = robot;
                     robot.X--;
                     robot.Fuel--;
+                    radar.checkRadioactivity(map, robot);
                     robot.PressedKeyStatus = "w";
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                 } else if(map[xLocation-1][yLocation] is Atomic)
                 {
                     map[xLocation][yLocation] = new Empty();
                     map[xLocation-1][yLocation] = robot;
                     robot.X--;
                     robot.Fuel -= Atomic.Damage;
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                     robot.PressedKeyStatus = "w";
                 }
             }
@@ -49,8 +48,8 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation+1][yLocation] = robot;
                     robot.X++;
                     robot.Fuel--;
+                    radar.checkRadioactivity(map, robot);
                     robot.PressedKeyStatus = "s";
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                 } else if(map[xLocation+1][yLocation] is Atomic)
                 {
                     map[xLocation][yLocation] = new Empty();
@@ -58,7 +57,6 @@ namespace JewelCollectorProject.Cells.RobotParts
                     robot.X++;
                     robot.Fuel -= Atomic.Damage;
                     robot.PressedKeyStatus = "s";
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -78,8 +76,8 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation][yLocation-1] = robot;
                     robot.Y--;
                     robot.Fuel--;
+                    radar.checkRadioactivity(map, robot);
                     robot.PressedKeyStatus = "a";
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                 }else if(map[xLocation][yLocation-1] is Atomic)
                 {
                     map[xLocation][yLocation] = new Empty();
@@ -87,7 +85,6 @@ namespace JewelCollectorProject.Cells.RobotParts
                     robot.Y--;
                     robot.Fuel -= Atomic.Damage;
                     robot.PressedKeyStatus = "a";
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -108,8 +105,8 @@ namespace JewelCollectorProject.Cells.RobotParts
                     map[xLocation][yLocation+1] = robot;
                     robot.Y++;
                     robot.Fuel--;
+                    radar.checkRadioactivity(map, robot);
                     robot.PressedKeyStatus = "d";
-                    radar.checkRadioactivity(map, xLocation, yLocation, robot);
                 } else if(map[xLocation][yLocation+1] is Atomic)
                 {
                     map[xLocation][yLocation] = map[xLocation][yLocation+1];
