@@ -9,16 +9,17 @@ namespace JewelCollectorProject.Cells.RobotParts
     /// <summary>
     /// Classe responsável por mover a posição do robô.
     /// Possui 4 métodos que movimentam o robô uma posição na matriz em qualquer uma das 4 direções possíveis.
+    /// Também reduz o combustível do robô de acordo com a regra:
+    /// - Se robô andar uma posição para uma célula vazia, reduz 1 ponto de combustível.
+    /// - Se robô andar uma posição para uma célula contendo um elemento Atomic, reduz o combustível no total de dano determinado na classe Atomic.
     /// </summary>
     public class Motor
     {
         /// <summary>
-        /// Método que movimenta o robô uma posição acima na matriz
+        /// Método que movimenta o robô uma posição acima na matriz.
         /// </summary>
         /// <param name="map">Matriz do tipo Map que representa o mapa do jogo.</param>
-        /// <param name="xLocation"></param>
-        /// <param name="yLocation"></param>
-        /// <param name="robot"></param>
+        /// <param name="robot">Robô que deverá ser movimentado no mapa do Jogo</param>
         public void moveUp(List<List<Cell>> map, Robot robot)
         {
             try
@@ -47,6 +48,11 @@ namespace JewelCollectorProject.Cells.RobotParts
             
         }
 
+        /// <summary>
+        /// Método que movimenta o robô uma posição abaixo na matriz.
+        /// </summary>
+        /// <param name="map">Matriz do tipo Map que representa o mapa do jogo.</param>
+        /// <param name="robot">Robô que deverá ser movimentado no mapa do Jogo</param>
         public void moveDown(List<List<Cell>> map, Robot robot)
         {
             try
@@ -74,7 +80,11 @@ namespace JewelCollectorProject.Cells.RobotParts
             }
             
         }
-
+        /// <summary>
+        /// Método que movimenta o robô uma posição à esquerda na matriz.
+        /// </summary>
+        /// <param name="map">Matriz do tipo Map que representa o mapa do jogo.</param>
+        /// <param name="robot">Robô que deverá ser movimentado no mapa do Jogo</param>
         public void moveLeft(List<List<Cell>> map, Robot robot) {
             try
             {
@@ -101,7 +111,11 @@ namespace JewelCollectorProject.Cells.RobotParts
             }
             
         }
-
+        /// <summary>
+        /// Método que movimenta o robô uma posição à direita na matriz.
+        /// </summary>
+        /// <param name="map">Matriz do tipo Map que representa o mapa do jogo.</param>
+        /// <param name="robot">Robô que deverá ser movimentado no mapa do Jogo</param>
         public string moveRight(List<List<Cell>> map, Robot robot)
         {
             try
@@ -124,7 +138,6 @@ namespace JewelCollectorProject.Cells.RobotParts
             }
             catch (ArgumentOutOfRangeException)
             {
-                
                 robot.PressedKeyStatus = "MOVIMENTO INVÁLIDO";
             }
             return "";
