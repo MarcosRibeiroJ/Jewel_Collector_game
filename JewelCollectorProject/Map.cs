@@ -40,7 +40,7 @@ namespace JewelCollectorProject.Maps
         }
         /// <summary>
         /// Método que cria uma matriz de Cell de acordo com a dimensão informada.
-        /// Realiza uma validação conforme a regra:
+        /// No primeiro momento, gera a matriz com todos elementos do tipo Empty, que em seguida serão substituídos conforme a regra de validação:
         /// - Se a dimensão for igual a 10, insere os elementos em posições fixas na matriz.
         /// - Se a dimensão for diferente de 10, insere aleatoriamente os elementos realizando um cálculo proporcional para o máximo de cada elemento.
         /// </summary>
@@ -66,6 +66,9 @@ namespace JewelCollectorProject.Maps
             }
         }
 
+        /// <summary>
+        /// Método que insere os elementos em posições fixas.
+        /// </summary>
         private void insertFixedCells()
         {
             insert(Robot, 0, 0);
@@ -90,7 +93,11 @@ namespace JewelCollectorProject.Maps
             insert(new Tree(), 2, 5);
             insert(new Tree(), 1, 4);
         }
-
+        /// <summary>
+        /// Método que insere os elementos na matriz de acordo com uma posição X e Y gerada aleatoriamente.
+        /// Por padrão, não insere o elemento Atomic em matrizes menores ou iguais a 10.
+        /// </summary>
+        /// <param name="dimension">Inteiro que representa a dimensão da matriz.</param>
         private void insertRandomCells(int dimension)
         {
             insert(Robot, 0, 0);
@@ -161,10 +168,22 @@ namespace JewelCollectorProject.Maps
                 }
             }
         }
+        /// <summary>
+        /// Método que insere um elemento em uma matriz.
+        /// </summary>
+        /// <param name="cell">Elemento do tipo Cell que será inserido.</param>
+        /// <param name="xLocation">Posição X na matriz.</param>
+        /// <param name="yLocation">Posição Y na matriz.</param>
         private void insert(Cell cell, int xLocation, int yLocation)
         {
             MapMatrix[xLocation][yLocation] = cell;
         }
+        /// <summary>
+        /// Método que calcula o limite máximo proporcional de cada elemento seguinda regra:
+        /// Tipos Tree, Water e Jewel: No máximo 10% do total de elementos da matriz, desconsiderando o robô.
+        /// Tipo Atomic: No máximo 1% do total de elementos da matriz, desconsiderando o robô.
+        /// </summary>
+        /// <param name="dimension">Inteiro que representa a dimensão da matriz.</param>
         private void generateTotalElements(int dimension)
         {
             maxTree = (int)Math.Round(((dimension * dimension) - 1) * 0.1);
