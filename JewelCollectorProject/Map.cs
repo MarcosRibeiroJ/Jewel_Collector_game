@@ -9,12 +9,22 @@ using JewelCollectorProject.Cells.RobotParts;
 
 namespace JewelCollectorProject.Maps
 {
+    /// <summary>
+    /// Classe que representa o mapa (tabuleiro) do jogo.
+    /// Seus atributos são:
+    /// MapMatrix: Uma matriz de objetos do tipo Cell.
+    /// maxTree, maxRedJewel, maxGreenJewel, maxBlueJewel, maxWater, maxAtomic: Inteiros que representam o máximo de cada elemento do jogo.
+    /// Robot: Robô inicializado na posição 0X0 da matriz.
+    /// </summary>
     public class Map
     {
         public List<List<Cell>> MapMatrix {get;} = new List<List<Cell>>();
         private int maxTree, maxRedJewel, maxGreenJewel, maxBlueJewel, maxWater, maxAtomic;
         public Robot Robot {get;} = new Robot(0,0);
         
+        /// <summary>
+        /// Método que imprime o elemento da matriz e em seguida retorna as cores do Console para o padrão original. 
+        /// </summary>
         public void printMap()
         {
             Console.Clear();
@@ -28,6 +38,13 @@ namespace JewelCollectorProject.Maps
                 Console.WriteLine();
             }
         }
+        /// <summary>
+        /// Método que cria uma matriz de Cell de acordo com a dimensão informada.
+        /// Realiza uma validação conforme a regra:
+        /// - Se a dimensão for igual a 10, insere os elementos em posições fixas na matriz.
+        /// - Se a dimensão for diferente de 10, insere aleatoriamente os elementos realizando um cálculo proporcional para o máximo de cada elemento.
+        /// </summary>
+        /// <param name="dimension"></param>
         public void createMap(int dimension)
         {
             for(int i = 0; i < dimension; i++)
@@ -78,7 +95,7 @@ namespace JewelCollectorProject.Maps
         {
             insert(Robot, 0, 0);
 
-            for (int i = 0; i <= maxAtomic; i++)
+            for (int i = 0; i <= maxAtomic && dimension > 10; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
