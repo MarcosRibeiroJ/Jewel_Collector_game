@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace JewelCollectorProject.Cells.Obstacles
 {
     /// <summary>
-    /// Classe que no jogo será usada como obstáculo para Robot.
+    /// Classe que no jogo será usada como obstáculo para o robô.
     /// </summary>
     public class Water : Cell
     {

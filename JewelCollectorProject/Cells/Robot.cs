@@ -215,10 +215,10 @@ namespace JewelCollectorProject.Cells
 
         private void useTree(Cell cell)
         {
-            if(cell is Tree tree && tree.isRechargeable)
+            if(cell is Tree tree && tree.IsRechargeable)
             {
                 Fuel += tree.FuelValue;
-                tree.isRechargeable = false;
+                tree.IsRechargeable = false;
             }
         }
 
