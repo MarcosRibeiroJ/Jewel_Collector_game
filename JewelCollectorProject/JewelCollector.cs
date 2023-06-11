@@ -11,7 +11,7 @@ namespace JewelCollectorProject
         /// Instancia um objeto do tipo Game e executa o método startGame para iniciar o jogo.
         /// </summary>
         public static void Main() {
-            Game newGame = new Game(8);
+            Game newGame = new Game();
             newGame.startGame();
         }
     }
