@@ -6,25 +6,34 @@ using JewelCollectorProject.Cells.Obstacles;
 
 namespace JewelCollectorProject.Cells.RobotParts
 {
+    /// <summary>
+    /// Classe responsável por mover a posição do robô.
+    /// Possui 4 métodos que movimentam o robô uma posição na matriz em qualquer uma das 4 direções possíveis.
+    /// </summary>
     public class Motor
     {
-        private Radar radar = new Radar();
-        public void moveUp(List<List<Cell>> map, int xLocation, int yLocation, Robot robot)
+        /// <summary>
+        /// Método que movimenta o robô uma posição acima na matriz
+        /// </summary>
+        /// <param name="map">Matriz do tipo Map que representa o mapa do jogo.</param>
+        /// <param name="xLocation"></param>
+        /// <param name="yLocation"></param>
+        /// <param name="robot"></param>
+        public void moveUp(List<List<Cell>> map, Robot robot)
         {
             try
             {
-                if(map[xLocation-1][yLocation] is Empty)
+                if(map[robot.X-1][robot.Y] is Empty)
                 {
-                    map[xLocation][yLocation] = map[xLocation-1][yLocation];
-                    map[xLocation-1][yLocation] = robot;
+                    map[robot.X][robot.Y] = map[robot.X-1][robot.Y];
+                    map[robot.X-1][robot.Y] = robot;
                     robot.X--;
                     robot.Fuel--;
-                    radar.check(map, robot);
                     robot.PressedKeyStatus = "w";
-                } else if(map[xLocation-1][yLocation] is Atomic)
+                } else if(map[robot.X-1][robot.Y] is Atomic)
                 {
-                    map[xLocation][yLocation] = new Empty();
-                    map[xLocation-1][yLocation] = robot;
+                    map[robot.X][robot.Y] = new Empty();
+                    map[robot.X-1][robot.Y] = robot;
                     robot.X--;
                     robot.Fuel -= Atomic.Damage;
                     robot.PressedKeyStatus = "w";
@@ -38,22 +47,21 @@ namespace JewelCollectorProject.Cells.RobotParts
             
         }
 
-        public void moveDown(List<List<Cell>> map, int xLocation, int yLocation, Robot robot)
+        public void moveDown(List<List<Cell>> map, Robot robot)
         {
             try
             {
-                if(map[xLocation+1][yLocation] is Empty)
+                if(map[robot.X+1][robot.Y] is Empty)
                 {
-                    map[xLocation][yLocation] = map[xLocation+1][yLocation];
-                    map[xLocation+1][yLocation] = robot;
+                    map[robot.X][robot.Y] = map[robot.X+1][robot.Y];
+                    map[robot.X+1][robot.Y] = robot;
                     robot.X++;
                     robot.Fuel--;
-                    radar.check(map, robot);
                     robot.PressedKeyStatus = "s";
-                } else if(map[xLocation+1][yLocation] is Atomic)
+                } else if(map[robot.X+1][robot.Y] is Atomic)
                 {
-                    map[xLocation][yLocation] = new Empty();
-                    map[xLocation+1][yLocation] = robot;
+                    map[robot.X][robot.Y] = new Empty();
+                    map[robot.X+1][robot.Y] = robot;
                     robot.X++;
                     robot.Fuel -= Atomic.Damage;
                     robot.PressedKeyStatus = "s";
@@ -67,21 +75,20 @@ namespace JewelCollectorProject.Cells.RobotParts
             
         }
 
-        public void moveLeft(List<List<Cell>> map, int xLocation, int yLocation, Robot robot) {
+        public void moveLeft(List<List<Cell>> map, Robot robot) {
             try
             {
-                if(map[xLocation][yLocation-1] is Empty)
+                if(map[robot.X][robot.Y-1] is Empty)
                 {
-                    map[xLocation][yLocation] = map[xLocation][yLocation-1];
-                    map[xLocation][yLocation-1] = robot;
+                    map[robot.X][robot.Y] = map[robot.X][robot.Y-1];
+                    map[robot.X][robot.Y-1] = robot;
                     robot.Y--;
                     robot.Fuel--;
-                    radar.check(map, robot);
                     robot.PressedKeyStatus = "a";
-                }else if(map[xLocation][yLocation-1] is Atomic)
+                }else if(map[robot.X][robot.Y-1] is Atomic)
                 {
-                    map[xLocation][yLocation] = new Empty();
-                    map[xLocation][yLocation-1] = robot;
+                    map[robot.X][robot.Y] = new Empty();
+                    map[robot.X][robot.Y-1] = robot;
                     robot.Y--;
                     robot.Fuel -= Atomic.Damage;
                     robot.PressedKeyStatus = "a";
@@ -95,22 +102,21 @@ namespace JewelCollectorProject.Cells.RobotParts
             
         }
 
-        public string moveRight(List<List<Cell>> map, int xLocation, int yLocation, Robot robot)
+        public string moveRight(List<List<Cell>> map, Robot robot)
         {
             try
             {
-                if(map[xLocation][yLocation+1] is Empty)
+                if(map[robot.X][robot.Y+1] is Empty)
                 {
-                    map[xLocation][yLocation] = new Empty();
-                    map[xLocation][yLocation+1] = robot;
+                    map[robot.X][robot.Y] = new Empty();
+                    map[robot.X][robot.Y+1] = robot;
                     robot.Y++;
                     robot.Fuel--;
-                    radar.check(map, robot);
                     robot.PressedKeyStatus = "d";
-                } else if(map[xLocation][yLocation+1] is Atomic)
+                } else if(map[robot.X][robot.Y+1] is Atomic)
                 {
-                    map[xLocation][yLocation] = map[xLocation][yLocation+1];
-                    map[xLocation][yLocation+1] = robot;
+                    map[robot.X][robot.Y] = map[robot.X][robot.Y+1];
+                    map[robot.X][robot.Y+1] = robot;
                     robot.Y++;
                     robot.Fuel -= Atomic.Damage;
                     robot.PressedKeyStatus = "d";

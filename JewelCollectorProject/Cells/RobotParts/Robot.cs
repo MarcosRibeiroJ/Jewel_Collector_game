@@ -25,22 +25,26 @@ namespace JewelCollectorProject.Cells.RobotParts
 
         public void moveUp(List<List<Cell>> map)
         {
-            Motor.moveUp(map, X, Y, this);
+            Motor.moveUp(map, this);
+            Radar.check(map, this);
         }
 
         public void moveDown(List<List<Cell>> map)
         {
-            Motor.moveDown(map, X, Y, this);
+            Motor.moveDown(map, this);
+            Radar.check(map, this);
         }
 
         public void moveLeft(List<List<Cell>> map)
         {
-            Motor.moveLeft(map, X, Y, this);
+            Motor.moveLeft(map, this);
+            Radar.check(map, this);
         }
 
         public void moveRight(List<List<Cell>> map)
         {
-            Motor.moveRight(map, X, Y, this);
+            Motor.moveRight(map, this);
+            Radar.check(map, this);
         }
 
         public void captureOrRecharge(List<List<Cell>> map)
