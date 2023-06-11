@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JewelCollectorProject.Cells.Jewels;
 using JewelCollectorProject.Cells.Obstacles;
+using JewelCollectorProject.Cells.RobotParts;
 
 namespace JewelCollectorProject.Cells
 {
@@ -15,125 +16,32 @@ namespace JewelCollectorProject.Cells
         public int TotalScore {get; set;}
         public int Fuel {get; set;} = 5;
         public string? PressedKeyStatus {get; set;}
+        public Motor Motor {get;}
         public Robot(int xLocation, int yLocation)
         {
             X = xLocation;
             Y = yLocation;
+            Motor = new Motor();
         }
 
         public void moveUp(List<List<Cell>> map)
         {
-            try
-            {
-                if(map[X-1][Y] is Empty)
-                {
-                    map[X][Y] = map[X-1][Y];
-                    map[X-1][Y] = this;
-                    X--;
-                    Fuel--;
-                    checkRadioactivity(map);
-                    PressedKeyStatus = "w";
-                } else if(map[X-1][Y] is Atomic)
-                {
-                    map[X][Y] = new Empty();
-                    map[X-1][Y] = this;
-                    X--;
-                    Fuel -= Atomic.Damage;
-                    PressedKeyStatus = "w";
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                
-                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
-            }
-            
+            Motor.moveUp(map, X, Y, this);
         }
 
         public void moveDown(List<List<Cell>> map)
         {
-            try
-            {
-                if(map[X+1][Y] is Empty)
-                {
-                    map[X][Y] = map[X+1][Y];
-                    map[X+1][Y] = this;
-                    X++;
-                    Fuel--;
-                    checkRadioactivity(map);
-                    PressedKeyStatus = "s";
-                } else if(map[X+1][Y] is Atomic)
-                {
-                    map[X][Y] = new Empty();
-                    map[X+1][Y] = this;
-                    X++;
-                    Fuel -= Atomic.Damage;
-                    PressedKeyStatus = "s";
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                
-                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
-            }
-            
+            Motor.moveDown(map, X, Y, this);
         }
 
-        public void moveLeft(List<List<Cell>> map) {
-            try
-            {
-                if(map[X][Y-1] is Empty)
-                {
-                    map[X][Y] = map[X][Y-1];
-                    map[X][Y-1] = this;
-                    Y--;
-                    Fuel--;
-                    checkRadioactivity(map);
-                    PressedKeyStatus = "a";
-                }else if(map[X][Y-1] is Atomic)
-                {
-                    map[X][Y] = new Empty();
-                    map[X][Y-1] = this;
-                    Y--;
-                    Fuel -= Atomic.Damage;
-                    PressedKeyStatus = "a";
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                
-                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
-            }
-            
-        }
-
-        public string moveRight(List<List<Cell>> map)
+        public void moveLeft(List<List<Cell>> map)
         {
-            try
-            {
-                if(map[X][Y+1] is Empty)
-                {
-                    map[X][Y] = new Empty();
-                    map[X][Y+1] = this;
-                    Y++;
-                    Fuel--;
-                    checkRadioactivity(map);
-                    PressedKeyStatus = "d";
-                } else if(map[X][Y+1] is Atomic)
-                {
-                    map[X][Y] = map[X][Y+1];
-                    map[X][Y+1] = this;
-                    Y++;
-                    Fuel -= Atomic.Damage;
-                    PressedKeyStatus = "d";
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                
-                PressedKeyStatus = "MOVIMENTO INVÁLIDO";
-            }
-            return "";
+            Motor.moveLeft(map, X, Y, this);
+        }
+
+        public void moveRight(List<List<Cell>> map)
+        {
+            Motor.moveRight(map, X, Y, this);
         }
         
         public void captureOrRecharge(List<List<Cell>> map)
@@ -222,34 +130,6 @@ namespace JewelCollectorProject.Cells
             }
         }
 
-        private void checkRadioactivity(List<List<Cell>> map)
-        {
-            int totalAtomicElements = 0;
-            try
-            {
-                for (int i = -1; i < 2; i++)
-                {
-                    if(map[X+i][Y] is Atomic)
-                    {
-                        totalAtomicElements++;
-                    }    
-                }
-                for (int i = -1; i < 2; i++)
-                {
-                    if(map[X][Y+i] is Atomic)
-                    {
-                        totalAtomicElements++;
-                    }    
-                }
-                Fuel -= Atomic.DamageArea * totalAtomicElements; 
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                
-                PressedKeyStatus = "";
-            }
-        }
-        
         public override string ToString()
         {
             Console.BackgroundColor = ConsoleColor.White;
