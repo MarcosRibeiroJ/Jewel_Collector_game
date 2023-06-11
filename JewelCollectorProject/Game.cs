@@ -23,7 +23,7 @@ namespace JewelCollectorProject
         }
         public void startGame()
         {
-            KeyPressed += onKeyPressed;
+            KeyPressed += onRobotMove;
             map.createMap(dimension);
             do
             {
@@ -56,6 +56,7 @@ namespace JewelCollectorProject
                 Console.WriteLine($"Fuel: {map.Robot.Fuel} | Level: {level}");
             }
             Console.WriteLine($"Bag total items: {map.Robot.Bag} | Bag total value: {map.Robot.TotalScore}");
+            Console.WriteLine("\nW (UP) | S (DOWN) | A (LEFT) | D (RIGHT) | G (GET/RECHARGE) | Q (QUIT)");
             Console.Write($"Enter the Command: {map.Robot.PressedKeyStatus}");
         }
 
@@ -63,22 +64,6 @@ namespace JewelCollectorProject
         {
             ConsoleKeyInfo keyPressed = Console.ReadKey();
             Command = keyPressed.KeyChar.ToString().ToLower();
-        }
-
-        private void onKeyPressed(string keyPressed)
-        {
-            switch (keyPressed)
-            {
-                case "w": map.Robot.moveUp(map.MapMatrix); break;
-                case "s": map.Robot.moveDown(map.MapMatrix); break;
-                case "a": map.Robot.moveLeft(map.MapMatrix); break;
-                case "d": map.Robot.moveRight(map.MapMatrix); break;
-                case "g": map.Robot.captureOrRecharge(map.MapMatrix); break;
-                case "q": exitGame(); break;
-                case "r": break;
-                case "quit": running = false; break;
-                default : map.Robot.PressedKeyStatus = "TECLA INVÁLIDA"; break;
-            }
         }
 
         private void nextLevel()
@@ -96,6 +81,8 @@ namespace JewelCollectorProject
             map.Robot.X = 0;
             map.Robot.Y = 0;
             map.Robot.Fuel = 5;
+            map.Robot.PressedKeyStatus = "";
+            Command = "";
             map.MapMatrix.Clear();
         }
 
@@ -104,7 +91,17 @@ namespace JewelCollectorProject
             Console.Clear();
             Console.Write("Digite quit + <ENTER> se deseja sair do jogo ou r + <ENTER> para retornar: ");
             string? exit = Console.ReadLine();
-            onKeyPressed(exit ?? string.Empty);
+            exit = exit?.ToLower();
+            switch (exit)
+            {
+                case "r": break;
+                case "quit": running = false; break;
+                default:
+                    Console.Clear();
+                    Console.Write("TECLA INVÁLIDA");
+                    Thread.Sleep(2000);
+                    exitGame();break;
+            }
         }
         
         private void gameOver()
@@ -131,6 +128,20 @@ namespace JewelCollectorProject
             Console.Clear();
             Console.WriteLine("PARABÉNS!! VOCÊ COLETOU TODAS AS JÓIAS PERDIDAS!! :)");
             running = false;
+        }
+
+        private void onRobotMove(string keyPressed)
+        {
+            switch (keyPressed)
+            {
+                case "w": map.Robot.moveUp(map.MapMatrix); break;
+                case "s": map.Robot.moveDown(map.MapMatrix); break;
+                case "a": map.Robot.moveLeft(map.MapMatrix); break;
+                case "d": map.Robot.moveRight(map.MapMatrix); break;
+                case "g": map.Robot.captureOrRecharge(map.MapMatrix); break;
+                case "q": exitGame(); break;
+                default : map.Robot.PressedKeyStatus = "TECLA INVÁLIDA"; break;
+            }
         }
     }
 }

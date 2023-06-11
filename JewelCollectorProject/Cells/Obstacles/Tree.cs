@@ -13,6 +13,7 @@ namespace JewelCollectorProject.Cells.Obstacles
         public override string ToString()
         {
             Console.BackgroundColor = isRechargeable ? ConsoleColor.DarkGreen : ConsoleColor.Black;
+            Console.ForegroundColor = isRechargeable ? ConsoleColor.DarkRed : ConsoleColor.White;
             return " $$ ";
         }
     }

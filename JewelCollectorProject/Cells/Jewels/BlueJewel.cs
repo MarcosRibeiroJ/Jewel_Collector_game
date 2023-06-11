@@ -14,6 +14,7 @@ namespace JewelCollectorProject.Cells.Jewels
         public override string ToString()
         {
             Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Black;
             return " JB ";
         }
     }
