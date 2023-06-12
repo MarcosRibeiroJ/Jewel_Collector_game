@@ -1,5 +1,3 @@
-using System;
-
 namespace JewelCollectorProject.KeyEvents
 {
     /// <summary>

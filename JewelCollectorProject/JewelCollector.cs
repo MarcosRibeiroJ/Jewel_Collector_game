@@ -1,5 +1,4 @@
-﻿using JewelCollectorProject.Maps;
-namespace JewelCollectorProject
+﻿namespace JewelCollectorProject
 {
     /// <summary>
     /// Classe principal do programa.

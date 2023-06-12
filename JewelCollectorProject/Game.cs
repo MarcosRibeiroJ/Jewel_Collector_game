@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using JewelCollectorProject.Maps;
 using JewelCollectorProject.KeyEvents;
 using JewelCollectorProject.Cells.Jewels;
