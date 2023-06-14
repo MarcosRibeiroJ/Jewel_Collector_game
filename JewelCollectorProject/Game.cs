@@ -26,7 +26,7 @@ namespace JewelCollectorProject
         private Map map = new Map();
         
         /// <summary>
-        /// Construtor padrão, se não receber nenhum valor, inicializa o jogo com uma matriz 10X10.
+        /// Construtor padrão, inicializa o jogo com uma matriz 10X10.
         /// </summary>
         public Game()
         {
