@@ -18,9 +18,9 @@ namespace JewelCollectorProject
     /// </summary>
     public class Game
     {
-        private int level = 1;
+        private int level;
         private int dimension;
-        private bool running = true;
+        private bool running;
         public event KeyPressedEventHandler? KeyPressed;
         public string? Command {get; set;}
         private Map map = new Map();
@@ -31,14 +31,8 @@ namespace JewelCollectorProject
         public Game()
         {
             this.dimension = 10;
-        }
-        /// <summary>
-        /// Sobrecarga do construtor, permite que o usuário defina o tamanho do mapa do jogo.
-        /// </summary>
-        /// <param name="dimension">Inteiro que será utilizado na altura e largura da matriz do mapa.</param>
-        public Game(int dimension)
-        {
-            this.dimension = dimension;
+            this.level = 1;
+            this.running = true;
         }
         /// <summary>
         /// Método responsável por iniciar uma partida do jogo.
