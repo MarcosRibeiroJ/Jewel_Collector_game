@@ -98,7 +98,7 @@ namespace JewelCollectorProject.Maps
         {
             insert(Robot, 0, 0);
 
-            for (int i = 0; i <= maxAtomic && dimension > 10; i++)
+            for (int i = 0; i < maxAtomic && dimension > 10; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
@@ -109,7 +109,7 @@ namespace JewelCollectorProject.Maps
                     insert(new Atomic(), x, y);
                 }
             }
-            for (int i = 0; i <= maxWater; i++)
+            for (int i = 0; i < maxWater; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
@@ -120,7 +120,7 @@ namespace JewelCollectorProject.Maps
                     insert(new Water(), x, y);
                 }
             }
-            for (int i = 0; i <= maxTree; i++)
+            for (int i = 0; i < maxTree; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
@@ -131,7 +131,7 @@ namespace JewelCollectorProject.Maps
                     insert(new Tree(), x, y);
                 }
             }
-            for (int i = 0; i <= maxBlueJewel; i++)
+            for (int i = 0; i < maxBlueJewel; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
@@ -142,7 +142,7 @@ namespace JewelCollectorProject.Maps
                     insert(new BlueJewel(), x, y);
                 }
             }
-            for (int i = 0; i <= maxGreenJewel; i++)
+            for (int i = 0; i < maxGreenJewel; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
@@ -153,7 +153,7 @@ namespace JewelCollectorProject.Maps
                     insert(new GreenJewel(), x, y);
                 }
             }
-            for (int i = 0; i <= maxRedJewel; i++)
+            for (int i = 0; i < maxRedJewel; i++)
             {
                 Random random = new Random();
                 int x = random.Next(1, dimension);
